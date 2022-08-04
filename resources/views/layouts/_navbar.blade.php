@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded">
+<nav class="bg-white border-gray-200 px-1 sm:px-1 py-2.5 rounded">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="{{ url('/') }}" class="flex items-center">
             <span class="self-center text-xl font-semibold whitespace-nowrap">Ham Sandwich</span>
@@ -18,6 +18,18 @@
                     <a href="{{route('posts.index')}}"
                        class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
                         Posts
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('tags.index')}}"
+                       class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline @if(Route::currentRouteName() === 'tags.index') current-page @endif" >
+                        Tags
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('posts.create')}}"
+                       class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline @if(Route::currentRouteName() === 'posts.create') current-page @endif" >
+                        Create Post
                     </a>
                 </li>
             </ul>
