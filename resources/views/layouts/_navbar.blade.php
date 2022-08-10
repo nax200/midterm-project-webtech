@@ -14,6 +14,10 @@
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white ">
+                @auth
+                    <li>
+                        {{ Auth::user()->name }} {{ Auth::user()->email }}
+                    </li>
                 <li>
                     <a href="{{route('posts.index')}}"
                        class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
@@ -32,6 +36,36 @@
                         Create Post
                     </a>
                 </li>
+                <li>
+                    <div class="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                        <svg class="absolute -left-1 w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                    </div>
+                </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{route('login')}}"
+                           class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline @if(Route::currentRouteName() === 'login') current-page @endif" >
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('register')}}"
+                           class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline @if(Route::currentRouteName() === 'register') current-page @endif" >
+                            Register
+                        </a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

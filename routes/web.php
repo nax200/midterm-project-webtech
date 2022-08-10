@@ -13,13 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () {
     return redirect()->to('/posts');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+// ใส่ก่อน resource
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\PostController::class, 'storeComment'])
-    ->name('posts.comments.store');
+    ->name('posts.comments.store'); // กำหนดชื่อ route
 
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
-Route::resource('/tags', \App\Http\Controllers\TagController::class);
+Route::resource('/tags',\App\Http\Controllers\TagController::class);

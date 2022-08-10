@@ -16,9 +16,12 @@
             {{ $post->like_count }} likes
         </p>
     </div>
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
         {{$post->title}}
     </h5>
+    <h3 class="mb-2 text-xl tracking-tight text-gray-900">
+        {{$post->user->name}}
+    </h3>
 
     <div class="my-4">
         @foreach($post->tags as $tag)
@@ -31,11 +34,13 @@
         {{$post->description}}
     </p>
 
+    @can('update', $post)
     <div>
         <a class="app-button my-3" href="{{ route('posts.edit', ['post' => $post]) }}">
             Edit this post
         </a>
     </div>
+    @endcan
 
     <section class="mx-16 mt-4">
         <form action="{{route('posts.comments.store',['post'=>$post->id])}}" method="post">
