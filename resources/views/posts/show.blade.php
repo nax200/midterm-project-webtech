@@ -74,7 +74,7 @@
                 @foreach($post->comments->sortByDesc('created_at') as $comment)
                     <div class="block p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 ">
                         <p class="bg-orange-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
-                            {{ $comment->created_at->diffForHumans() }}
+                            {{ $comment->created_at->diffForHumans() }} by {{$comment->user->name}}
                         </p>
                         <div class="text-xl pl-4">
                             {{ $comment->message }}
