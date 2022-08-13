@@ -34,6 +34,14 @@
         {{$post->description}}
     </p>
 
+    <div>
+        @if ($post->pictures != null)
+            <image src="{{ url( 'storage/images/'.$post->pictures) }}" alt="" title="" width="200">
+
+        @endif
+
+    </div>
+
     @can('update', $post)
     <div>
         <a class="app-button my-3" href="{{ route('posts.edit', ['post' => $post]) }}">

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <form action="{{ route('posts.store') }}" method="post">
+    <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="relative z-0 mb-6 w-1/3 group">
             @if ($errors->has('title'))
@@ -34,6 +34,30 @@
         @endif
         <textarea name="description" id="description" rows="4" class="block p-2.5 w-1/3 text-sm text-gray-900 bg-gray-50 rounded-lg border @error('description') border-red-600 @else border-gray-300 @enderror focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Your message..." autocomplete="off"></textarea>
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="file" name="image" id="image" class="form-control">
+            </div>
+        </div>
+
+        @if ($errors->has('image'))
+            <p class="text-red-600">
+                {{ $errors->first('image') }}
+            </p>
+        @endif
+
+{{--        @if (count($errors) > 0)--}}
+{{--            <div class="alert alert-danger">--}}
+{{--                <strong>Whoops!</strong> There were some problems with your input.--}}
+{{--                <ul>--}}
+{{--                    @foreach ($errors->all() as $error)--}}
+{{--                        <li>{{ $error }}</li>--}}
+{{--                    @endforeach--}}
+{{--                </ul>--}}
+{{--            </div>--}}
+{{--        @endif--}}
+
         <button type="submit" class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
     </form>
 

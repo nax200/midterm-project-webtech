@@ -38,7 +38,7 @@
                 </li>
                 <li>
                     <div class="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                        <img src="{{ url(Auth::user()->profile_image) }}" alt="" title=""/>
+                        <img src="{{ url('storage/profiles/'.Auth::user()->profile_image) }}" alt="" title=""/>
                     </div>
                 </li>
                     <li>

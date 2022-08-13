@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -49,12 +50,19 @@ class PostController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'min:5', 'max:255'],
-            'description' => ['required', 'min:5', 'max:1000']
+            'description' => ['required', 'min:5', 'max:1000'],
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:1000000']
         ]); // เกิด errors
 
         $post = new Post();
+
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->storeAs('public/images', $imageName);
+        $post->pictures = $imageName;
+
         $post->title = $request->input('title');
         $post->description = $request->input('description');
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         $tags = $request->get('tags');
