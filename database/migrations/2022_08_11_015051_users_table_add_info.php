@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_image')->after('name')->default('default.jpg');
+            $table->string('description')->after('name')->nullable()->default(null);
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('profile_image');
+            $table->dropColumn('description');
         });
     }
 };
