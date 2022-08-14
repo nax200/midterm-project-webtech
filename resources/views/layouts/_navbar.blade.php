@@ -15,8 +15,9 @@
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white ">
                 @auth
-                    <li>
-                        {{ Auth::user()->name }} {{ Auth::user()->email }}
+                    <a href="{{route('users.show',['user'=> Auth::user()])}}"
+                       class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline @if(Route::currentRouteName() === 'account.show') current-page @endif" >{{ Auth::user()->name }} {{ Auth::user()->email }}
+                       </a>
                     </li>
                 <li>
                     <a href="{{route('posts.index')}}"

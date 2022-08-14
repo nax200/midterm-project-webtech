@@ -51,7 +51,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'min:5', 'max:255'],
             'description' => ['required', 'min:5', 'max:1000'],
-            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:1000000']
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:100000000']
         ]); // เกิด errors
 
         $post = new Post();

@@ -13,3 +13,11 @@
 .current-page {
     @apply text-white bg-blue-500 md:bg-transparent md:text-blue-500;
 }
+
+.app-bg-input{
+    @apply border-2 bg-[#cbd5e1];
+}
+
+.app-button-edit {
+    @apply px-8 py-0 rounded-2xl hover:bg-[#ea580c] bg-[#fdba74] shadow-xl;
+}

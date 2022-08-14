@@ -30,3 +30,4 @@ Route::post('/posts/{post}/comments', [\App\Http\Controllers\PostController::cla
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/tags',\App\Http\Controllers\TagController::class);
 Route::resource('/test',\App\Http\Controllers\TestController::class);
+Route::resource('/users',\App\Http\Controllers\UserController::class);
