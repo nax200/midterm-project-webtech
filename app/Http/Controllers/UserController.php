@@ -53,9 +53,12 @@ class UserController extends Controller
     {
         if(strlen($request->input('password'))>0 || strlen($request->input('password_confirmation'))>0){
         $validated = $request->validate([
-            'password' => ['min:8','confirmed', Rules\Password::defaults()],
-            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:1000000']]);
+            'password' => ['min:8','confirmed', Rules\Password::defaults()]]);
         $user->password = Hash::make($request->input('password'));
+        }
+        if($request->image != null){
+        $validated = $request->validate([
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:1000000']]);
         $imageName = time().'.'.$request->image->extension();
         $request->image->storeAs('public/profiles', $imageName);
         $user->profile_image = $imageName;
