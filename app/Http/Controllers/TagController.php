@@ -15,6 +15,10 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
+        //sort tag by post count
+        $tags = $tags->sortByDesc(function ($tag) {
+            return $tag->posts->count();
+        });
         return view('tags.index', ['tags'=>$tags]);
     }
 
