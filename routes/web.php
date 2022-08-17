@@ -27,7 +27,11 @@ require __DIR__.'/auth.php';
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\PostController::class, 'storeComment'])
     ->name('posts.comments.store'); // กำหนดชื่อ route
 
+Route::get('/users/{user}/posts', [\App\Http\Controllers\UserController::class, 'userPosts'])
+    ->name('users.posts'); // กำหนดชื่อ route
+
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/tags',\App\Http\Controllers\TagController::class);
 Route::resource('/test',\App\Http\Controllers\TestController::class);
 Route::resource('/users',\App\Http\Controllers\UserController::class);
+Route::resource('/comments',\App\Http\Controllers\CommentController::class);

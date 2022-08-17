@@ -14,7 +14,7 @@
         <br class="mx-8 mt-2">
             Description: {{$user->description}}
         </br>
-        <u><a class="app-button-edit" href="{{route('users.edit', ['user'=>$user->id])}}">edit</a></u>
+        <u><a class="app-button-edit" href="{{route('users.edit', ['user'=>Auth::user()->id])}}">edit</a></u>
     </section>
 
 

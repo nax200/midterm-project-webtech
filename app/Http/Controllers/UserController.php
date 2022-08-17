@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +14,13 @@ class UserController extends Controller
     {
         //
     }
-
+    
+    public function userPosts()
+    {
+        $posts = Post::all()->where('user_id',Auth::user()->id);
+        // $posts = Post::all();
+        return view('posts.user',['posts'=>$posts]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -69,6 +77,7 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('users.show',['user'=>$user->id]);
     }
+    
 
     
 }
