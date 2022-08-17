@@ -55,11 +55,11 @@ class PostController extends Controller
         ]); // เกิด errors
 
         $post = new Post();
-
+        if ($request->image != null) {
         $imageName = time().'.'.$request->image->extension();
         $request->image->storeAs('public/images', $imageName);
         $post->pictures = $imageName;
-
+        }
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->user_id = Auth::user()->id;
