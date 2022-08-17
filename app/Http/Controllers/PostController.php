@@ -27,6 +27,8 @@ class PostController extends Controller
         return view('posts.index',['posts'=>$posts]);
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -51,7 +53,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'min:5', 'max:255'],
             'description' => ['required', 'min:5', 'max:1000'],
-            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:1000000']
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:100000000']
         ]); // เกิด errors
 
         $post = new Post();
@@ -91,7 +93,6 @@ class PostController extends Controller
             $post->view_count = $post->view_count + 1;
             $post->save();
         }
-
         return view('posts.show', ['post'=>$post]);
     }
 
@@ -104,7 +105,6 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
-
         $tags = $post->tags->pluck('name')->all();
         $tags = implode(", ", $tags);
         return view('posts.edit', ['post' => $post, 'tags' => $tags]);
@@ -120,7 +120,6 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->authorize('update', $post);
-
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->save();
@@ -143,13 +142,13 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('delete', $post);
-
         $post->delete();
         return redirect()->route('posts.index');
     }
 
     public function storeComment(Request $request, Post $post) {
         $comment = new Comment();
+        $comment->user_id = Auth::user()->id;
         $comment->message = $request->get('message');
         $post->comments()->save($comment);
         return redirect()->route('posts.show',['post' => $post->id]);

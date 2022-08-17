@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CommentController extends Controller
 {
@@ -80,6 +83,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $post_id = $comment->post_id;
+        $post = Post::all()->where('id',$post_id)->first();
+        $this->authorize('delete', $comment);
+        $comment->delete();
+        return view('posts.show', ['post' => $post]);
     }
 }

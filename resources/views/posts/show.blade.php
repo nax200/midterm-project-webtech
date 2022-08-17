@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="mb-4">
+    <div class="mb-4 ml-4">
         <p class="bg-orange-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
             <svg class="w-6 h-6 inline mr-1" viewBox="0 0 20 20">
                 <path d="M10,6.978c-1.666,0-3.022,1.356-3.022,3.022S8.334,13.022,10,13.022s3.022-1.356,3.022-3.022S11.666,6.978,10,6.978M10,12.267c-1.25,0-2.267-1.017-2.267-2.267c0-1.25,1.016-2.267,2.267-2.267c1.251,0,2.267,1.016,2.267,2.267C12.267,11.25,11.251,12.267,10,12.267 M18.391,9.733l-1.624-1.639C14.966,6.279,12.563,5.278,10,5.278S5.034,6.279,3.234,8.094L1.609,9.733c-0.146,0.147-0.146,0.386,0,0.533l1.625,1.639c1.8,1.815,4.203,2.816,6.766,2.816s4.966-1.001,6.767-2.816l1.624-1.639C18.536,10.119,18.536,9.881,18.391,9.733 M16.229,11.373c-1.656,1.672-3.868,2.594-6.229,2.594s-4.573-0.922-6.23-2.594L2.41,10l1.36-1.374C5.427,6.955,7.639,6.033,10,6.033s4.573,0.922,6.229,2.593L17.59,10L16.229,11.373z"></path>
@@ -16,21 +16,21 @@
             {{ $post->like_count }} likes
         </p>
     </div>
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ml-4">
         {{$post->title}}
     </h5>
-    <h3 class="mb-2 text-xl tracking-tight text-gray-900">
+    <h3 class="mb-2 text-xl tracking-tight text-gray-900 ml-4">
         {{$post->user->name}}
     </h3>
 
-    <div class="my-4">
+    <div class="my-4 ml-4">
         @foreach($post->tags as $tag)
             <p class="bg-green-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
                 {{ $tag->name }}
             </p>
         @endforeach
     </div>
-    <p class="font-normal text-gray-700 dark:text-gray-400">
+    <p class="font-normal text-gray-700 dark:text-gray-400 ml-4">
         {{$post->description}}
     </p>
 
@@ -135,9 +135,39 @@
                             {{ $comment->message }}
                         </div>
                     </div>
-                @endforeach
+                <button class="block app-button red" onclick="showDelete()" class="app-button red">DELETE</button>
             </div>
-
+            <form action="{{ route('comments.destroy', ['comment' => $comment]) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <div hidden id="popup">
+            <div id="popup-modal" tabindex="-1" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
+                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+                    <!-- <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> -->
+                    <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-6 text-center">
+                    <!-- <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> -->
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this comment?</h3>
+                    <button method="post" data-modal-toggle="popup-modal" type="summit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        Yes, I'm sure
+                    </button>
+                    <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">No, cancel</button>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </form>
+                <script>
+                    function showDelete() {
+                        let element = document.getElementById("popup");
+                        element.removeAttribute("hidden");
+                    }
+                </script>
+        @endforeach
         @else
             <div class="pl-8">
                 Be the first one to comment...
