@@ -56,9 +56,16 @@ class PostController extends Controller
 
         $post = new Post();
 
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->storeAs('public/images', $imageName);
-        $post->pictures = $imageName;
+        if (($request->image != null)) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->storeAs('public/images', $imageName);
+            $post->pictures = $imageName;
+        }
+
+        if ($request->issue_date == 0) {
+            $date = strtotime($request->input('resolved_date'));
+            $post->issue_date = $date;
+        }
 
         $post->title = $request->input('title');
         $post->description = $request->input('description');
@@ -122,6 +129,8 @@ class PostController extends Controller
         $tag_ids = $this->syncTags($tags);
         $post->tags()->sync($tag_ids);
 
+
+
         return redirect()->route('posts.show', ['post' => $post]);
     }
 
@@ -169,5 +178,24 @@ class PostController extends Controller
         }
 
         return $tag_ids;
+    }
+
+    public function updateStatus(Request $request, Post $post)
+    {
+        $this->authorize('updateStatus', $post);
+
+//        dd($request);
+//        dd($post);
+        $post->status = $request->input('status');
+        $post->resolved_by = $request->input('resolved_by');
+
+        $date = strtotime($request->input('resolved_date'));
+        $post->resolved_date = date('Y-m-d H:i:s', $date);
+
+        $post->save();
+
+
+
+        return redirect()->route('posts.show', ['post' => $post]);
     }
 }

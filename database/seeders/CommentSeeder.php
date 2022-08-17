@@ -51,8 +51,10 @@ class CommentSeeder extends Seeder
         $comment->created_at = $date;
         $comment->updated_at = $date;
         $post->comments()->save($comment);
-        $post->status = 'Need More Information';
+        // admin/staff changes info
+        $post->status = 'info';
         $post->resolved_by = User::where('id','1')->first()->name;
+//        $post->resolved_date = $date;
         $post->updated_at = $date;
         $post->save();
 
@@ -64,7 +66,7 @@ class CommentSeeder extends Seeder
         $comment->created_at = $date;
         $comment->updated_at = $date;
         $post->comments()->save($comment);
-        $post->status = 'Waiting Fix';
+        $post->status = 'fix';
         $post->resolved_by = User::where('id','2')->first()->name;
         $post->updated_at = $date;
         $post->save();
