@@ -93,4 +93,9 @@ class PostPolicy
     {
         return $user->isAdmin();
     }
+
+    public function updateStatus(User $user, Post $post)
+    {
+        return $user->isAdmin() or $user->isStaff();
+    }
 }

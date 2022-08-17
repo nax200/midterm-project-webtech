@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('status')->after('id')->default("Waiting reply");
+            $table->string('status')->after('id')->default("wait");
             $table->string('pictures')->after('id')->nullable()->default(null);
             $table->string('resolved_by')->after('id')->nullable()->default(null);
             $table->date('resolved_date')->after('id')->nullable()->default(null);

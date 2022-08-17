@@ -37,9 +37,56 @@
     <div>
         @if ($post->pictures != null)
             <image src="{{ url( 'storage/images/'.$post->pictures) }}" alt="" title="" width="200">
-
         @endif
+    </div>
 
+    <div>
+        <p>
+            Issue Date:
+            @if($post->issue_date != null)
+                {{$post->issue_date}}
+            @else
+                -
+            @endif
+        </p>
+    </div>
+
+    <div>
+        <p>
+            Status:
+            @if ($post->status == 'wait')
+            Waiting Reply
+            @elseif ($post->status == 'done')
+            Resolved
+            @elseif($post->status == 'int')
+            Intended
+            @elseif($post->status == 'info')
+            Need More Information
+            @elseif($post->status == 'fix')
+            Waiting Fix
+            @endif
+        </p>
+    </div>
+    <div>
+        <p>
+            Resolved By:
+            @if($post->resolved_by != null)
+                {{$post->resolved_by}}
+            @else
+                -
+            @endif
+        </p>
+    </div>
+
+    <div>
+        <p>
+            Resolved At:
+            @if($post->resolved_date != null)
+                {{$post->resolved_date}}
+            @else
+                -
+            @endif
+        </p>
     </div>
 
     @can('update', $post)

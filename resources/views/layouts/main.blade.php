@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://unpkg.com/flowbite@1.5.2/dist/datepicker.js"></script>
 </head>
 <body>
 
