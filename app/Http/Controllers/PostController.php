@@ -13,7 +13,7 @@ class PostController extends Controller
 {
 
     public function __construct() { // php constructor
-        $this->middleware(['auth'])->except(['index','show']);
+        $this->middleware(['auth'])->except(['index','show','indexCreateRecent','indexBest','indexPopular','indexUpdated']);
     }
 
     /**
@@ -25,6 +25,30 @@ class PostController extends Controller
     {
         $posts = Post::all();
         return view('posts.index',['posts'=>$posts]);
+    }
+
+    public function indexCreateRecent()
+    {
+        $posts = Post::all()->sortByDesc('created_at');
+        return view('posts.index_create_recent',['posts'=>$posts]);
+    }
+
+    public function indexBest()
+    {
+        $posts = Post::all()->sortByDesc('like_count');
+        return view('posts.index_best',['posts'=>$posts]);
+    }
+
+    public function indexPopular()
+    {
+        $posts = Post::all()->sortByDesc('view_count');
+        return view('posts.index_popular',['posts'=>$posts]);
+    }
+
+    public function indexUpdated()
+    {
+        $posts = Post::all()->sortByDesc('resolved_date');
+        return view('posts.index_updated',['posts'=>$posts]);
     }
 
     

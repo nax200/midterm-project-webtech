@@ -34,6 +34,17 @@ Route::post('/posts/{post}/update/status', [\App\Http\Controllers\PostController
 Route::get('/users/{user}/posts', [\App\Http\Controllers\UserController::class, 'userPosts'])
     ->name('users.posts'); // กำหนดชื่อ route
 
+Route::get('/posts/create/recent', [\App\Http\Controllers\PostController::class, 'indexCreateRecent'])
+    ->name('posts.index.recent'); // กำหนดชื่อ route
+
+Route::get('/posts/best',[\App\Http\Controllers\PostController::class, 'indexBest'])
+    ->name('posts.index.best'); // กำหนดชื่อ route สำหรับ redirect()
+
+Route::get('/posts/popular',[\App\Http\Controllers\PostController::class, 'indexPopular'])
+    ->name('posts.index.popular'); // กำหนดชื่อ route สำหรับ redirect()
+
+Route::get('/posts/updated',[\App\Http\Controllers\PostController::class, 'indexUpdated'])
+    ->name('posts.index.updated'); // กำหนดชื่อ route สำหรับ redirect()
 
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/tags',\App\Http\Controllers\TagController::class);
