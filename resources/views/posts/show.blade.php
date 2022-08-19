@@ -42,6 +42,17 @@
 
     <div>
         <p>
+            Created At:
+            @if($post->created_at != null)
+                {{$post->created_at}}
+            @else
+                -
+            @endif
+        </p>
+    </div>
+
+    <div>
+        <p>
             Issue Date:
             @if($post->issue_date != null)
                 {{$post->issue_date}}
