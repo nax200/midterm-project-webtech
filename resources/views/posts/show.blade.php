@@ -122,11 +122,11 @@
         </form>
     </section>
 
-    <section class="mt-8 mx-16">
+    <section class="mt-8">
         <h2 class="text-2xl mb-2">Comments</h2>
         @if($post->comments->isNotEmpty())
-            <div class="flex flex-wrap space-y-2">
-                @foreach($post->comments->sortByDesc('created_at') as $comment)
+            @foreach($post->comments->sortByDesc('created_at') as $comment)
+            <div class="flex flex-wrap space-y-2 mx-16 my-4">
                     <div class="block p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 ">
                         <p class="bg-orange-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
                             {{ $comment->created_at->diffForHumans() }} by {{$comment->user->name}}
@@ -135,7 +135,9 @@
                             {{ $comment->message }}
                         </div>
                     </div>
+                @can('delete', $comment)
                 <button class="block app-button red" onclick="showDelete()" class="app-button red">DELETE</button>
+                @endcan
             </div>
             <form action="{{ route('comments.destroy', ['comment' => $comment]) }}" method="post">
             @csrf
@@ -146,15 +148,14 @@
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
                     <!-- <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> -->
-                    <span class="sr-only">Close modal</span>
                     </button>
                     <div class="p-6 text-center">
                     <!-- <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> -->
                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this comment?</h3>
-                    <button method="post" data-modal-toggle="popup-modal" type="summit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                    <button method="post" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                         Yes, I'm sure
                     </button>
-                    <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">No, cancel</button>
+                    <button type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10" onclick="hideDelete()">No, cancel</button>
                 </div>
                 </div>
                 </div>
@@ -163,11 +164,13 @@
                 </form>
                 <script>
                     function showDelete() {
-                        let element = document.getElementById("popup");
-                        element.removeAttribute("hidden");
+                        document.getElementById("popup").hidden = false;
+                    }
+                    function hideDelete() {
+                        document.getElementById("popup").hidden = true;
                     }
                 </script>
-        @endforeach
+            @endforeach
         @else
             <div class="pl-8">
                 Be the first one to comment...
