@@ -90,6 +90,7 @@ class PostController extends Controller
         if ($request->issue_date != null and
             $request->issue_date != 0) {
             $date = strtotime($request->input('issue_date'));
+            $date = date('Y-m-d H:i:s',$date);
             $post->issue_date = $date;
         }
 
