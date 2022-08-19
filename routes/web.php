@@ -40,3 +40,5 @@ Route::resource('/tags',\App\Http\Controllers\TagController::class);
 Route::resource('/test',\App\Http\Controllers\TestController::class);
 Route::resource('/users',\App\Http\Controllers\UserController::class);
 Route::resource('/comments',\App\Http\Controllers\CommentController::class);
+Route::resource('/admin',\App\Http\Controllers\AdminController::class);
+

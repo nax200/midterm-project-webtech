@@ -27,7 +27,7 @@ class PostController extends Controller
         return view('posts.index',['posts'=>$posts]);
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,14 +64,16 @@ class PostController extends Controller
             $post->pictures = $imageName;
         }
 
-        if ($request->issue_date == 0) {
-            $date = strtotime($request->input('resolved_date'));
+        if ($request->issue_date != null and
+            $request->issue_date != 0) {
+            $date = strtotime($request->input('issue_date'));
             $post->issue_date = $date;
         }
 
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->user_id = Auth::user()->id;
+//        dd($post);
         $post->save();
 
         $tags = $request->get('tags');
