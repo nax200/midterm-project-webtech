@@ -20,8 +20,21 @@
         {{$post->title}}
     </h5>
     <h3 class="mb-2 text-xl tracking-tight text-gray-900 ml-4">
-        {{$post->user->name}}
+        {{ $post->user->name }}
     </h3>
+
+    <div>
+        @can('like', $post)
+            <form action="{{route('posts.like',['post'=>$post])}}" method="post">
+                @csrf
+                <button class="block app-button blue" method="post" type="submit">LIKE</button>
+            </form>
+
+        @endcan
+        @cannot('like', $post)
+            <button class="block app-button red" disabled>Login to like</button>
+        @endcan
+    </div>
 
     <div class="my-4 ml-4">
         @foreach($post->tags as $tag)

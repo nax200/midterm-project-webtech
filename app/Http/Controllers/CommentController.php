@@ -87,6 +87,12 @@ class CommentController extends Controller
         $post = Post::all()->where('id',$post_id)->first();
         $this->authorize('delete', $comment);
         $comment->delete();
+
+        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via deleting a comment
+            $post->view_count = $post->view_count - 1;
+            $post->save();
+        }
+
         return view('posts.show', ['post' => $post]);
     }
 }

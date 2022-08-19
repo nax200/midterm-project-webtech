@@ -98,4 +98,9 @@ class PostPolicy
     {
         return $user->isAdmin() or $user->isStaff();
     }
+
+    public function like(User $user)
+    {
+        return $user->isUser() or $user->isStaff() or $user->isAdmin();
+    }
 }
