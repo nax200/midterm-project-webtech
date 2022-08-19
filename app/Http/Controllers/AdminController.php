@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -17,6 +18,10 @@ class AdminController extends Controller
      */
     public function index()
     {
+//        if (!Auth::user()->isAdmin()) {
+//            abort(403);
+//        }
+        $this->authorize('forceDelete', Post::find(1));
         // get all posts created this month
         $posts = Post::all()->where('created_at','>=',Carbon::today()->startOfMonth()->toDateString())
             ->where('created_at','<=',Carbon::today()->endOfMonth()->toDateString());
