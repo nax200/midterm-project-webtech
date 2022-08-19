@@ -26,7 +26,19 @@
             <textarea class="app-bg-input" name="description" id="" cols="30" rows="1">{{old('description',$user->description)}}</textarea>
         </div>
         <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="oldpassword" :value="__('Old Password')" />
+                @error('oldpassword')
+                <p class="text-red-600">
+                    {{$errors->first('oldpassword')}}
+                </p>
+                @enderror
+                <x-input id="oldpassword" class="block mt-1 w-full"
+                                type="password"
+                                name="oldpassword"
+                />
+            </div>
+        <div class="mt-4">
+                <x-label for="password" :value="__('New Password')" />
                 @error('password')
                 <p class="text-red-600">
                     {{$errors->first('password')}}

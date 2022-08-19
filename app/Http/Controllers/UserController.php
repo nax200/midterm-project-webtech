@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Post;
+use App\Rules\CheckOldPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
@@ -59,9 +60,13 @@ class UserController extends Controller
      */
     public function update(Request $request,User $user)
     {
-        if(strlen($request->input('password'))>0 || strlen($request->input('password_confirmation'))>0){
+        if(strlen($request->input('oldpassword'))>0||strlen($request->input('password'))>0 || strlen($request->input('password_confirmation'))>0){
         $validated = $request->validate([
-            'password' => ['min:8','confirmed', Rules\Password::defaults()]]);
+            'password' => ['min:8','confirmed', Rules\Password::defaults()]
+            ]);
+        $validated = $request->validate([
+            'oldpassword' => ['required',new CheckOldPassword()]
+            ]);
         $user->password = Hash::make($request->input('password'));
         }
         if($request->image != null){
