@@ -27,6 +27,8 @@ require __DIR__.'/auth.php';
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\PostController::class, 'storeComment'])
     ->name('posts.comments.store'); // กำหนดชื่อ route
 
+Route::post('/posts/{post}/like', [\App\Http\Controllers\PostController::class, 'likePost'])
+    ->name('posts.like'); // กำหนดชื่อ route
 
 Route::post('/posts/{post}/update/status', [\App\Http\Controllers\PostController::class, 'updateStatus'])
     ->name('posts.update.status'); // กำหนดชื่อ route
