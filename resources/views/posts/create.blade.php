@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
+            <label class="text-blue mb-2 font-medium">
+                Hint :วิธีติดต่อพนักงานสำหรับเรื่องเล็กน้อยที่สามารถจัดการได้
+                <br>แม่บ้าน พี่สวย 08x-xxxxxxxx</br>
+                แม่บ้าน พี่ฝน  09x-xxxxxxxx
+            </label >
     <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="relative z-0 mb-6 w-1/3 group">
