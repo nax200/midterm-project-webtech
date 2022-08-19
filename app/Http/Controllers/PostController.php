@@ -13,7 +13,7 @@ class PostController extends Controller
 {
 
     public function __construct() { // php constructor
-        $this->middleware(['auth'])->except(['index','show']);
+        $this->middleware(['auth'])->except(['index','show','indexCreateRecent','indexBest','indexPopular','indexUpdated']);
     }
 
     /**
@@ -27,7 +27,37 @@ class PostController extends Controller
         return view('posts.index',['posts'=>$posts]);
     }
 
-    
+    public function indexCreateRecent()
+    {
+        $posts = Post::all()->sortByDesc('created_at');
+        return view('posts.index_create_recent',['posts'=>$posts]);
+    }
+
+    public function indexBest()
+    {
+        $posts = Post::all()->sortByDesc('like_count');
+        return view('posts.index_best',['posts'=>$posts]);
+    }
+
+    public function indexPopular()
+    {
+        $posts = Post::all()->sortByDesc('view_count');
+        return view('posts.index_popular',['posts'=>$posts]);
+    }
+
+    public function indexUpdated()
+    {
+        $posts = Post::all()->sortByDesc('resolved_date');
+        return view('posts.index_updated',['posts'=>$posts]);
+    }
+
+    public function indexUnresolved()
+    {
+        $this->authorize('resolve', Post::class);
+        $posts = Post::all()->sortByDesc('created_at');
+        return view('posts.index_unresolved',['posts'=>$posts]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,14 +94,17 @@ class PostController extends Controller
             $post->pictures = $imageName;
         }
 
-        if ($request->issue_date == 0) {
-            $date = strtotime($request->input('resolved_date'));
+        if ($request->issue_date != null and
+            $request->issue_date != 0) {
+            $date = strtotime($request->input('issue_date'));
+            $date = date('Y-m-d H:i:s',$date);
             $post->issue_date = $date;
         }
 
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->user_id = Auth::user()->id;
+//        dd($post);
         $post->save();
 
         $tags = $request->get('tags');
@@ -151,6 +184,12 @@ class PostController extends Controller
         $comment->user_id = Auth::user()->id;
         $comment->message = $request->get('message');
         $post->comments()->save($comment);
+
+        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via commenting
+            $post->view_count = $post->view_count - 1;
+            $post->save();
+        }
+
         return redirect()->route('posts.show',['post' => $post->id]);
     }
 
@@ -196,5 +235,29 @@ class PostController extends Controller
 
 
         return redirect()->route('posts.show', ['post' => $post]);
+    }
+
+    public function likePost(Request $request, Post $post) {
+        $this->authorize('like', $post);
+//        $user = Auth::user();
+//        foreach ($user->likedPosts as $cur_post) {
+//            if ($post->id == $cur_post->id) { // already liked this post
+//                if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via liking
+//                    $post->view_count = $post->view_count - 1;
+//                    $post->save();
+//                }
+//                return redirect()->route('posts.show',['post' => $post->id]);
+//            }
+//        }
+        if (is_int($post->like_count)) {
+            $post->like_count = $post->like_count + 1;
+            $post->save();
+        }
+        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via liking
+            $post->view_count = $post->view_count - 1;
+            $post->save();
+        }
+//        $user->likedPosts()->save($post);
+        return redirect()->route('posts.show',['post' => $post->id]);
     }
 }

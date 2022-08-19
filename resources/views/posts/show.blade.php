@@ -20,13 +20,28 @@
         {{$post->title}}
     </h5>
     <h3 class="mb-2 text-xl tracking-tight text-gray-900 ml-4">
-        {{$post->user->name}}
+        {{ $post->user->name }}
     </h3>
+
+    <div>
+        @can('like', $post)
+            <form action="{{route('posts.like',['post'=>$post])}}" method="post">
+                @csrf
+                <button class="block app-button blue" method="post" type="submit">LIKE</button>
+            </form>
+
+        @endcan
+        @cannot('like', $post)
+            <button class="block app-button red" disabled>Login to like</button>
+        @endcan
+    </div>
 
     <div class="my-4 ml-4">
         @foreach($post->tags as $tag)
             <p class="bg-green-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
-                {{ $tag->name }}
+                <a href="{{route('tags.show',['tag'=>$tag])}}">
+                    {{ $tag->name }}
+                </a>
             </p>
         @endforeach
     </div>
@@ -42,6 +57,17 @@
 
     <div>
         <p class="ml-4 my-2">
+            Created At:
+            @if($post->created_at != null)
+                {{$post->created_at}}
+            @else
+                -
+            @endif
+        </p>
+    </div>
+
+    <div>
+        <p>
             Issue Date:
             @if($post->issue_date != null)
                 {{$post->issue_date}}

@@ -16,8 +16,12 @@
             <ul class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white ">
                 @auth
                     <li class="mt-3">
-                        {{ Auth::user()->name }}    {{ Auth::user()->email }}
-                        
+                        {{ Auth::user()->name }}
+                    </li>
+                    <li>
+                        <div class="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                            <img src="{{ url('storage/profiles/'.Auth::user()->profile_image) }}" alt="" title=""/>
+                        </div>
                     </li>
                 <li>
                     <a href="{{route('posts.index')}}"
@@ -37,11 +41,6 @@
                         Create Post
                     </a>
                 </li>
-                <li>
-                    <div class="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                        <img src="{{ url('storage/profiles/'.Auth::user()->profile_image) }}" alt="" title=""/>
-                    </div>
-                </li>
                 <div class="flex">
          <button id="states-button" data-dropdown-toggle="dropdown-states" class=" flex-shrink-0 z-10 inline-flex rounded-lg items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
         <svg aria-hidden="true" class="h-3" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_12694_49953" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="12"><rect x="0.5" width="14" height="12" rx="2" fill="white"/></mask></svg>
@@ -50,27 +49,46 @@
     <div id="dropdown-states" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
             <li>
-            <a href="{{route('users.show',['user'=> Auth::user()])}}">
+            <a href="{{route('users.show',['user'=> Auth::user()])}}" class="block">
                 <button type="button" class="inline-flex rounded py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 text-gray-400 hover:bg-gray-600 hover:text-white">
                     <div class="inline-flex items-center">
                         Profile
                     </div>
                 </button>
             </a>
-            <a href="{{route('users.edit', ['user'=>Auth::user()->id])}}">
+            <a href="{{route('users.edit', ['user'=>Auth::user()->id])}}" class="block">
                 <button type="button" class="inline-flex rounded py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 text-gray-400 hover:bg-gray-600 hover:text-white">
                     <div class="inline-flex items-center">
                         Edit Profile
                     </div>
                 </button>
             </a>
-            <a href="{{route('users.posts', ['user'=>Auth::user()->id])}}">
+            <a href="{{route('users.posts', ['user'=>Auth::user()->id])}}" class="block">
                 <button type="button" class="inline-flex rounded py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 text-gray-400 hover:bg-gray-600 hover:text-white">
-                    <div class="inline-flex items-center">        
-                        Own Post
+                    <div class="inline-flex items-center">
+                        My Posts
                     </div>
                 </button>
             </a>
+                @if(Auth::user()->isAdmin() or Auth::user()->isStaff())
+                    <a href="{{route('posts.index.unresolved', ['user'=>Auth::user()->id])}}" class="block">
+                        <button type="button" class="inline-flex rounded py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 text-gray-400 hover:bg-gray-600 hover:text-white">
+                            <div class="inline-flex items-center">
+                                Unresolved Posts
+                            </div>
+                        </button>
+                    </a>
+                @endif
+
+                @if(Auth::user()->isAdmin())
+                <a href="{{route('admin.index', ['user'=>Auth::user()->id])}}" class="block">
+                    <button type="button" class="inline-flex rounded py-2 px-4 w-full text-sm text-red-600 hover:bg-red-100 text-gray-400 hover:bg-red-600 hover:text-white">
+                        <div class="inline-flex items-center">
+                            Admin
+                        </div>
+                    </button>
+                </a>
+                @endif
             </li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
@@ -79,7 +97,7 @@
                             <x-dropdown-link :href="route('logout')"
                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();"
-                                                class="text-gray-400">
+                                             class="inline-flex rounded py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 text-gray-400 hover:bg-gray-600 hover:text-white">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>

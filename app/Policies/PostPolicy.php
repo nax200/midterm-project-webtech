@@ -33,6 +33,11 @@ class PostPolicy
         return true;
     }
 
+    public function resolve(User $user)
+    {
+        return $user->isAdmin() or $user->isStaff();
+    }
+
     /**
      * Determine whether the user can create models.
      *
@@ -97,5 +102,10 @@ class PostPolicy
     public function updateStatus(User $user, Post $post)
     {
         return $user->isAdmin() or $user->isStaff();
+    }
+
+    public function like(User $user)
+    {
+        return $user->isUser() or $user->isStaff() or $user->isAdmin();
     }
 }
