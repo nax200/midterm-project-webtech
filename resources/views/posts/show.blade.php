@@ -39,7 +39,10 @@
     <div class="my-4 ml-4">
         @foreach($post->tags as $tag)
             <p class="bg-green-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
-                {{ $tag->name }}
+                <a href="{{route('tags.show',['tag'=>$tag])}}">
+                    {{ $tag->name }}
+                </a>
+
             </p>
         @endforeach
     </div>
