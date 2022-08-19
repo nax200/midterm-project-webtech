@@ -227,9 +227,9 @@ class PostController extends Controller
 
 //        dd($request);
 //        dd($post);
+        $validated = $request->validate(['resolved_date' => ['date_format:Y-m-d']]);
         $post->status = $request->input('status');
         $post->resolved_by = $request->input('resolved_by');
-
         $date = strtotime($request->input('resolved_date'));
         $post->resolved_date = date('Y-m-d H:i:s', $date);
 
