@@ -33,6 +33,11 @@ class PostPolicy
         return true;
     }
 
+    public function resolve(User $user)
+    {
+        return $user->isAdmin() or $user->isStaff();
+    }
+
     /**
      * Determine whether the user can create models.
      *
