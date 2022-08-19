@@ -90,6 +90,7 @@ class PostController extends Controller
         if ($request->issue_date != null and
             $request->issue_date != 0) {
             $date = strtotime($request->input('issue_date'));
+            $date = date('Y-m-d H:i:s',$date);
             $post->issue_date = $date;
         }
 
@@ -176,6 +177,12 @@ class PostController extends Controller
         $comment->user_id = Auth::user()->id;
         $comment->message = $request->get('message');
         $post->comments()->save($comment);
+
+        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via commenting
+            $post->view_count = $post->view_count - 1;
+            $post->save();
+        }
+
         return redirect()->route('posts.show',['post' => $post->id]);
     }
 
@@ -221,5 +228,29 @@ class PostController extends Controller
 
 
         return redirect()->route('posts.show', ['post' => $post]);
+    }
+
+    public function likePost(Request $request, Post $post) {
+        $this->authorize('like', $post);
+//        $user = Auth::user();
+//        foreach ($user->likedPosts as $cur_post) {
+//            if ($post->id == $cur_post->id) { // already liked this post
+//                if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via liking
+//                    $post->view_count = $post->view_count - 1;
+//                    $post->save();
+//                }
+//                return redirect()->route('posts.show',['post' => $post->id]);
+//            }
+//        }
+        if (is_int($post->like_count)) {
+            $post->like_count = $post->like_count + 1;
+            $post->save();
+        }
+        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via liking
+            $post->view_count = $post->view_count - 1;
+            $post->save();
+        }
+//        $user->likedPosts()->save($post);
+        return redirect()->route('posts.show',['post' => $post->id]);
     }
 }
