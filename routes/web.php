@@ -52,6 +52,9 @@ Route::get('/posts/popular',[\App\Http\Controllers\PostController::class, 'index
 Route::get('/posts/updated',[\App\Http\Controllers\PostController::class, 'indexUpdated'])
     ->name('posts.index.updated'); // กำหนดชื่อ route สำหรับ redirect()
 
+Route::get('/posts/unresolved',[\App\Http\Controllers\PostController::class, 'indexUnresolved'])
+    ->name('posts.index.unresolved'); // กำหนดชื่อ route สำหรับ redirect()
+
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/tags',\App\Http\Controllers\TagController::class);
 Route::resource('/test',\App\Http\Controllers\TestController::class);

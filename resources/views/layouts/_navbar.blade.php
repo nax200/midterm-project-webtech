@@ -70,6 +70,16 @@
                     </div>
                 </button>
             </a>
+                @if(Auth::user()->isAdmin() or Auth::user()->isStaff())
+                    <a href="{{route('posts.index.unresolved', ['user'=>Auth::user()->id])}}" class="block">
+                        <button type="button" class="inline-flex rounded py-2 px-4 w-full text-sm text-gray-700 hover:bg-gray-100 text-gray-400 hover:bg-gray-600 hover:text-white">
+                            <div class="inline-flex items-center">
+                                Unresolved Posts
+                            </div>
+                        </button>
+                    </a>
+                @endif
+
                 @if(Auth::user()->isAdmin())
                 <a href="{{route('admin.index', ['user'=>Auth::user()->id])}}" class="block">
                     <button type="button" class="inline-flex rounded py-2 px-4 w-full text-sm text-red-600 hover:bg-red-100 text-gray-400 hover:bg-red-600 hover:text-white">
