@@ -23,6 +23,10 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 // ใส่ก่อน resource
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\PostController::class, 'storeComment'])
     ->name('posts.comments.store'); // กำหนดชื่อ route
