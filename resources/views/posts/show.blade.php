@@ -42,7 +42,6 @@
                 <a href="{{route('tags.show',['tag'=>$tag])}}">
                     {{ $tag->name }}
                 </a>
-
             </p>
         @endforeach
     </div>
