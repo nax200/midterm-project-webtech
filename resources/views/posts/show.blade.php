@@ -27,12 +27,12 @@
         @can('like', $post)
             <form action="{{route('posts.like',['post'=>$post])}}" method="post">
                 @csrf
-                <button class="block app-button blue" method="post" type="submit">LIKE</button>
+                <button class="block app-button blue ml-4 my-2" method="post" type="submit">LIKE</button>
             </form>
 
         @endcan
         @cannot('like', $post)
-            <button class="block app-button red" disabled>Login to like</button>
+            <button class="block app-button red ml-4 my-2" disabled>Login to like</button>
         @endcan
     </div>
 
@@ -67,7 +67,7 @@
     </div>
 
     <div>
-        <p>
+        <p class="ml-4 my-2">
             Issue Date:
             @if($post->issue_date != null)
                 {{$post->issue_date}}

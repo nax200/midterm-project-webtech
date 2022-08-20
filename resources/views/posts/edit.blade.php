@@ -33,12 +33,12 @@
                   placeholder="Your message..." autocomplete="off">{{$post->description}}
         </textarea>
         @if ($errors->has('issue_date'))
-            <p class="text-red-600">
+            <p class="text-red-600 ml-4">
                 {{ $errors->first('issue_date') }}
             </p>
         @endif
             </div>
-            <input name="issue_date" id="issue_date" value="{{$post->issue_date}}" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Issue date format: Y-m-d">
+            <input name="issue_date" id="issue_date" value="{{$post->issue_date}}" class="my-2 ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Issue date format: Y-m-d">
         </div>
 
         @cannot('updateStatus', $post)
@@ -73,7 +73,7 @@
         </div>
 
         @if ($errors->has('resolved_date'))
-            <p class="text-red-600">
+            <p class="text-red-600 ml-4">
                 {{ $errors->first('resolved_date') }}
             </p>
         @endif
@@ -81,7 +81,7 @@
             <input name="resolved_date" id="resolved_date" value="{{$post->resolved_date}}" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Resolved date format: Y-m-d">
         </div>
 
-        <button type="submit" class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Status</button>
+        <button type="submit" class="ml-4 mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Status</button>
 
     </form>
     @endcan
@@ -89,7 +89,7 @@
     <form action="{{ route('posts.destroy', ['post' => $post]) }}" method="post">
         @csrf
         @method('DELETE')
-        <button class="app-button red ml-4 " type="submit">DELETE</button>
+        <button class="app-button red ml-4 my-2" type="submit">DELETE</button>
     </form>
 
 @endsection

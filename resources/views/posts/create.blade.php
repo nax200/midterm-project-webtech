@@ -10,12 +10,12 @@
         @csrf
         <div class="relative z-0 mb-6 w-1/3 group">
             @if ($errors->has('title'))
-                <p class="text-red-600">
+                <p class="text-red-600 ml-4">
                     {{ $errors->first('title') }}
                 </p>
             @endif
             <input type="text" name="title" id="title" class="block ml-4 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 @error('title') border-red-600 @else border-gray-300 @enderror appearance-none focus:outline-none focus:ring-0 focus:border-gray-800 peer"
-                   placeholder=" " required="" autocomplete="off">
+                   placeholder=" " autocomplete="off">
             <label for="title" class="ml-4 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-gray-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                 Title
             </label>
@@ -23,7 +23,7 @@
 
         <div class="relative z-0 mb-6 w-1/3 group">
             <input type="text" name="tags" id="tags" class="block ml-4 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-800 peer"
-                   placeholder=" " required="" autocomplete="off">
+                   placeholder=" " autocomplete="off">
             <label for="tags" class="ml-4 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-gray-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                 Tags (separated with commas)
             </label>
@@ -33,7 +33,7 @@
             Description
         </label>
         @if ($errors->has('description'))
-            <p class="text-red-600">
+            <p class="text-red-600 ml-4">
                 {{ $errors->first('description') }}
             </p>
         @endif
@@ -46,7 +46,7 @@
             </div>
         </div>
         @if ($errors->has('issue_date'))
-            <p class="text-red-600">
+            <p class="text-red-600 ml-4">
                 {{ $errors->first('issue_date') }}
             </p>
         @endif
@@ -55,7 +55,7 @@
         </div>
 
         @if ($errors->has('image'))
-            <p class="text-red-600">
+            <p class="text-red-600 ml-4">
                 {{ $errors->first('image') }}
             </p>
         @endif
