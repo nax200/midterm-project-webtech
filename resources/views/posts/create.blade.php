@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-            <label class="text-blue mb-2 font-medium">
-                Hint :วิธีติดต่อพนักงานสำหรับเรื่องเล็กน้อยที่สามารถจัดการได้
-                <br>แม่บ้าน พี่สวย 08x-xxxxxxxx</br>
-                แม่บ้าน พี่ฝน  09x-xxxxxxxx
-            </label >
+            <div class="flex-col text-blue-700 mb-2 font-medium ml-4">
+                <a class="block">Hint :วิธีติดต่อพนักงานสำหรับเรื่องเล็กน้อยที่สามารถจัดการได้</a>
+                <a class="block">แม่บ้าน พี่สวย 08x-xxxxxxxx</a>
+                <a class="block">แม่บ้าน พี่ฝน  09x-xxxxxxxx</a>
+    </div >
     <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="relative z-0 mb-6 w-1/3 group">
@@ -45,12 +45,13 @@
                 <input type="file" name="image" id="image" class="form-control">
             </div>
         </div>
-
-        <div class="relative mx-4">
-            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+        @if ($errors->has('issue_date'))
+            <p class="text-red-600">
+                {{ $errors->first('issue_date') }}
+            </p>
+        @endif
             </div>
-            <input name="issue_date" datepicker datepicker-autohide class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Select issue date">
+            <input name="issue_date" id="issue_date" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Issue date format: Y-m-d">
         </div>
 
         @if ($errors->has('image'))

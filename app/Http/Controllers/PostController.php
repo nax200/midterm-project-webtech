@@ -96,6 +96,7 @@ class PostController extends Controller
 
         if ($request->issue_date != null and
             $request->issue_date != 0) {
+            $validated = $request->validate(['issue_date' => ['date_format:Y-m-d']]);
             $date = strtotime($request->input('issue_date'));
             $date = date('Y-m-d H:i:s',$date);
             $post->issue_date = $date;
@@ -155,6 +156,15 @@ class PostController extends Controller
         $this->authorize('update', $post);
         $post->title = $request->input('title');
         $post->description = $request->input('description');
+        if ($request->issue_date != null and
+            $request->issue_date != 0) {
+        $validated = $request->validate(['issue_date' => ['date_format:Y-m-d']]);
+        $date = strtotime($request->input('issue_date'));
+        $date = date('Y-m-d H:i:s',$date);
+        $post->issue_date = $date;
+        }else{
+        $post->issue_date = null;
+        }
         $post->save();
 
         $tags = $request->get('tags');
@@ -224,9 +234,9 @@ class PostController extends Controller
 
 //        dd($request);
 //        dd($post);
+        $validated = $request->validate(['resolved_date' => ['date_format:Y-m-d']]);
         $post->status = $request->input('status');
         $post->resolved_by = $request->input('resolved_by');
-
         $date = strtotime($request->input('resolved_date'));
         $post->resolved_date = date('Y-m-d H:i:s', $date);
 
