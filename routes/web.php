@@ -23,6 +23,10 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 // ใส่ก่อน resource
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\PostController::class, 'storeComment'])
     ->name('posts.comments.store'); // กำหนดชื่อ route
@@ -47,6 +51,9 @@ Route::get('/posts/popular',[\App\Http\Controllers\PostController::class, 'index
 
 Route::get('/posts/updated',[\App\Http\Controllers\PostController::class, 'indexUpdated'])
     ->name('posts.index.updated'); // กำหนดชื่อ route สำหรับ redirect()
+
+Route::get('/posts/unresolved',[\App\Http\Controllers\PostController::class, 'indexUnresolved'])
+    ->name('posts.index.unresolved'); // กำหนดชื่อ route สำหรับ redirect()
 
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/tags',\App\Http\Controllers\TagController::class);

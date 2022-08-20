@@ -51,6 +51,13 @@ class PostController extends Controller
         return view('posts.index_updated',['posts'=>$posts]);
     }
 
+    public function indexUnresolved()
+    {
+        $this->authorize('resolve', Post::class);
+        $posts = Post::all()->sortByDesc('created_at');
+        return view('posts.index_unresolved',['posts'=>$posts]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
