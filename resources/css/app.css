@@ -29,3 +29,7 @@
 .app-button-edit {
     @apply px-8 py-0 rounded-2xl hover:bg-[#ea580c] bg-[#fdba74] shadow-xl;
 }
+
+.app-button-seemore {
+    @apply text-white bg-gray-400 hover:bg-gray-600 focus:ring-4 focus:bg-gray-800 focus:outline-none focus:ring-gray-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center;
+}

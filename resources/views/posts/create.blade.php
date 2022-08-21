@@ -51,7 +51,7 @@
             </p>
         @endif
             </div>
-            <input name="issue_date" id="issue_date" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Issue date format: Y-m-d">
+            <input name="issue_date" id="issue_date" size="26" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  datepicker-input" placeholder="Issue date format:YYYY-mm-dd">
         </div>
 
         @if ($errors->has('image'))

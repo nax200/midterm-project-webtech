@@ -3,7 +3,7 @@
 @section('content')
 
     <h2 class="text-2xl my-5 ml-4">
-        Most view posts
+        Most viewed posts
     </h2>
     @foreach($posts->sortByDesc('view_count') as $post)
         <a href="{{route('posts.show',['post'=>$post])}}" class="inline-block min-h-full min-w-max max-w-sm mx-4 my-3 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
