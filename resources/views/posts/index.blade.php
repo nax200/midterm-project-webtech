@@ -30,8 +30,12 @@
              @endif
         @endforeach
     </div>
-    <a href="{{route('posts.index.popular')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
-            See more
+    <a href="{{route('posts.index.popular')}}" class="ml-4 block">
+        <button type="button" class="app-button-seemore">
+                    <div class="inline-flex items-center">
+                        See more
+                    </div>
+                </button>
     </a>
     <h2 class="text-2xl my-5 ml-4">
         Most liked posts
@@ -58,8 +62,12 @@
             @endif
     @endforeach
     </div>
-        <a href="{{route('posts.index.popular')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
-            See more
+        <a href="{{route('posts.index.best')}}" class="ml-4 block">
+            <button type="button" class="app-button-seemore">
+                    <div class="inline-flex items-center">
+                        See more
+                    </div>
+                </button>
         </a>
     <h2 class="text-2xl my-5 ml-4">
         Most recently created posts
@@ -84,8 +92,12 @@
         <?php $count =$count+1 ?>
         @endif
     @endforeach
-    <a href="{{route('posts.index.recent')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
-            See more
+    <a href="{{route('posts.index.recent')}}" class="ml-4 block" >
+        <button type="button" class="app-button-seemore">
+                    <div class="inline-flex items-center">
+                        See more
+                    </div>
+                </button>
     </a>
 
     <h2 class="text-2xl my-5 ml-4">
@@ -111,7 +123,11 @@
         <?php $count =$count+1 ?>
         @endif
     @endforeach
-    <a href="{{route('posts.index.updated')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
-            See more
+    <a href="{{route('posts.index.updated')}}" class="ml-4 block" >
+        <button type="button" class="app-button-seemore">
+                    <div class="inline-flex items-center">
+                        See more
+                    </div>
+                </button>
     </a>
 @endsection

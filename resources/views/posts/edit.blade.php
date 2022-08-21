@@ -38,7 +38,7 @@
             </p>
         @endif
             </div>
-            <input name="issue_date" id="issue_date" value="{{$post->issue_date}}" class="my-2 ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Issue date format: Y-m-d">
+            <input name="issue_date" id="issue_date" size="26" value="{{$post->issue_date}}" class="my-2 ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  datepicker-input" placeholder="Issue date format:YYYY-mm-dd">
         </div>
 
         @cannot('updateStatus', $post)
@@ -78,7 +78,7 @@
             </p>
         @endif
         <div>
-            <input name="resolved_date" id="resolved_date" value="{{$post->resolved_date}}" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  datepicker-input" placeholder="Resolved date format: Y-m-d">
+            <input name="resolved_date" id="resolved_date" size="29" value="{{$post->resolved_date}}" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  datepicker-input" placeholder="Resolved date format:YYYY-mm-dd">
         </div>
 
         <button type="submit" class="ml-4 mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Status</button>
