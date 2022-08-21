@@ -15,7 +15,7 @@
                 </p>
             @endif
             <input type="text" name="title" id="title" class="block ml-4 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 @error('title') border-red-600 @else border-gray-300 @enderror appearance-none focus:outline-none focus:ring-0 focus:border-gray-800 peer"
-                   placeholder=" " autocomplete="off">
+            value="{{old('title')}}" placeholder=" " autocomplete="off">
             <label for="title" class="ml-4 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-gray-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                 Title
             </label>
@@ -23,7 +23,7 @@
 
         <div class="relative z-0 mb-6 w-1/3 group">
             <input type="text" name="tags" id="tags" class="block ml-4 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-800 peer"
-                   placeholder=" " autocomplete="off">
+                value="{{old('tags')}}" placeholder=" " autocomplete="off">
             <label for="tags" class="ml-4 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-gray-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                 Tags (separated with commas)
             </label>
@@ -38,7 +38,7 @@
             </p>
         @endif
         <textarea name="description" id="description" rows="4" class="block ml-4 p-2.5 w-1/3 text-sm text-gray-900 bg-gray-50 rounded-lg border @error('description') border-red-600 @else border-gray-300 @enderror focus:ring-gray-800 focus:border-gray-800 "
-                  placeholder="Your message..." autocomplete="off"></textarea>
+            placeholder="Your message..." autocomplete="off" onKeyPress>{{old('description')}}</textarea>
 
         <div class="row my-4 ml-4">
             <div class="col-md-6">
@@ -51,7 +51,7 @@
             </p>
         @endif
             </div>
-            <input name="issue_date" id="issue_date" size="26" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  datepicker-input" placeholder="Issue date format:YYYY-mm-dd">
+            <input name="issue_date" id="issue_date" size="26" value="{{old('issue_date')}}"class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  datepicker-input" placeholder="Issue date format:YYYY-mm-dd">
         </div>
 
         @if ($errors->has('image'))
