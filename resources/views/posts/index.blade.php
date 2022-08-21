@@ -30,11 +30,16 @@
              @endif
         @endforeach
     </div>
+    <a href="{{route('posts.index.popular')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
+            See more
+    </a>
     <h2 class="text-2xl my-5 ml-4">
         Most liked posts
     </h2>
+    <?php $count = 0 ?>
     <div class="flex justify-center flex-wrap ">
         @foreach($posts->sortByDesc('like_count') as $post)
+        @if($count < 5)
             <a href="{{route('posts.show',['post'=>$post])}}" class="post-block">
                 <p class="bg-gray-200 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
                     <svg class="w-4 h-6 inline mr-1" viewBox="0 0 16 16">
@@ -49,9 +54,11 @@
                     {{$post->description}}
                 </p>
             </a>
+            <?php $count =$count+1 ?>
+            @endif
     @endforeach
     </div>
-        <a href="{{route('posts.index.popular')}}" class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
+        <a href="{{route('posts.index.popular')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
             See more
         </a>
     <h2 class="text-2xl my-5 ml-4">
@@ -77,7 +84,7 @@
         <?php $count =$count+1 ?>
         @endif
     @endforeach
-    <a href="{{route('posts.index.recent')}}" class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
+    <a href="{{route('posts.index.recent')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
             See more
     </a>
 
@@ -104,7 +111,7 @@
         <?php $count =$count+1 ?>
         @endif
     @endforeach
-    <a href="{{route('posts.index.updated')}}" class="block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
+    <a href="{{route('posts.index.updated')}}" class="ml-4 block py-2 pr-4 pl-3 rounded md:p-0 hover:underline mt-3 @if(Route::currentRouteName() === 'posts.index') current-page @endif" >
             See more
     </a>
 @endsection
