@@ -96,7 +96,7 @@ class PostController extends Controller
 
         if ($request->issue_date != null and
             $request->issue_date != 0) {
-            $validated = $request->validate(['issue_date' => ['date_format:YYYY-mm-dd']]);
+            $validated = $request->validate(['issue_date' => ['date_format:Y-m-d']]);
             $date = strtotime($request->input('issue_date'));
             $date = date('Y-m-d H:i:s',$date);
             $post->issue_date = $date;
@@ -154,11 +154,15 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->authorize('update', $post);
+        $validated = $request->validate([
+            'title' => ['required', 'min:5', 'max:255'],
+            'description' => ['required', 'min:5', 'max:1000']
+        ]);
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         if ($request->issue_date != null and
             $request->issue_date != 0) {
-        $validated = $request->validate(['issue_date' => ['date_format:YYYY-mm-dd']]);
+        $validated = $request->validate(['issue_date' => ['date_format:Y-m-d']]);
         $date = strtotime($request->input('issue_date'));
         $date = date('Y-m-d H:i:s',$date);
         $post->issue_date = $date;
@@ -234,7 +238,7 @@ class PostController extends Controller
 
 //        dd($request);
 //        dd($post);
-        $validated = $request->validate(['resolved_date' => ['date_format:YYYY-mm-dd']]);
+        $validated = $request->validate(['resolved_date' => ['required','date_format:Y-m-d']]);
         $post->status = $request->input('status');
         $post->resolved_by = $request->input('resolved_by');
         $date = strtotime($request->input('resolved_date'));
