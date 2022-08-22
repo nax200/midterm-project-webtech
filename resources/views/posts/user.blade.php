@@ -3,7 +3,7 @@
 @section('content')
 
     <h2 class="text-2xl ml-4 my-5">
-        My posts
+        {{$user}} posts
     </h2>
         @foreach($posts as $post)
             <a href="{{route('posts.show',['post'=>$post])}}" class="post-block">

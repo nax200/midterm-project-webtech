@@ -23,7 +23,9 @@
     </h5>
     @if($post->incognito != "1")
     <h3 class="mb-2 text-xl tracking-tight text-gray-900 ml-4">
-        {{ $post->user->name }}
+        <a href="{{route('users.show', ['user' => $post->user])}}" class="text-blue-500 hover:underline hover:text-blue-700">
+            {{ $post->user->name }}
+        </a>
     </h3>
     @endif
     @if($post->incognito == "1")
@@ -57,9 +59,9 @@
         {{$post->description}}
     </p>
 
-    <div>
+    <div class="ml-4">
         @if ($post->pictures != null)
-            <image src="{{ url( 'storage/images/'.$post->pictures) }}" alt="" title="" width="200">
+            <image src="{{ url( 'storage/images/'.$post->pictures) }}" alt="" title="" width="420.69">
         @endif
     </div>
 
@@ -68,6 +70,17 @@
             Created At:
             @if($post->created_at != null)
                 {{$post->created_at}}
+            @else
+                -
+            @endif
+        </p>
+    </div>
+
+    <div>
+        <p class="ml-4 my-2">
+            Updated At:
+            @if($post->updated_at != null)
+                {{$post->updated_at}}
             @else
                 -
             @endif

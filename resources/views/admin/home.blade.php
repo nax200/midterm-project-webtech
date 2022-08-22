@@ -107,4 +107,8 @@
         </script>
     </div>
 
+    <div>
+        <button onClick="window.print()" class="app-button-seemore ml-4">Print this page</button>
+    </div>
+
 @endsection

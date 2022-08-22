@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="mx-8">
-        <div class="overflow-hidden relative w-20 h-20 bg-gray-800 rounded-full">
+        <div class="overflow-hidden relative w-40 h-40 bg-gray-800 rounded-full">
         <img src="{{ url('storage/profiles/'.Auth::user()->profile_image) }}" alt="" title=""/>
         </div>
         <br><h1 class="text-3xl mx-2 my-6">

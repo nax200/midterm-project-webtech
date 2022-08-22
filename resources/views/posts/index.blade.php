@@ -17,7 +17,11 @@
                     {{ $post->view_count }} views
                 </p>
                 <h5 class="post-text title">
+                    @if($post->incognito == '1')
+                        Incognito
+                    @else
                     {{$post->user->name}}
+                        @endif
                 </h5>
                 <h5 class="post-text title">
                     {{$post->title}}
@@ -72,7 +76,6 @@
     <h2 class="text-2xl my-5 ml-4">
         Most recently created posts
     </h2>
-    <div class="flex justify-center flex-wrap">
     <?php $count = 0 ?>
     <div class="flex justify-center flex-wrap">
     @foreach($posts->sortByDesc('created_at') as $post)
@@ -94,7 +97,7 @@
         <?php $count =$count+1 ?>
         @endif
     @endforeach
-    </div
+    </div>
     <a href="{{route('posts.index.recent')}}" class="ml-4 block" >
         <button type="button" class="app-button-seemore">
                     <div class="inline-flex items-center">
@@ -108,7 +111,6 @@
     </h2>
     <div class="flex justify-center flex-wrap">
     <?php $count = 0 ?>
-    <div class="flex justify-center flex-wrap">
     @foreach($posts->sortByDesc('resolved_date') as $post)
         @if($count < 5 and $post->status == "done")
         <a href="{{route('posts.show',['post'=>$post])}}" class="post-block">
@@ -131,7 +133,7 @@
 </div>
     <a href="{{route('posts.index.updated')}}" class="ml-4 block" >
         <button type="button" class="app-button-seemore">
-                    <div class="inline-flex items-center">
+                    <div class="">
                         See more
                     </div>
                 </button>
