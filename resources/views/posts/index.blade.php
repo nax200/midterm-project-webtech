@@ -18,7 +18,9 @@
                 </p>
                 <h5 class="post-text title">
                     @if($post->incognito == '1')
-                        Incognito
+                        <div class="text-gray-400">
+                            (anonymous)
+                        </div>
                     @else
                     {{$post->user->name}}
                         @endif

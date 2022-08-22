@@ -3,9 +3,10 @@
 @section('content')
 
     <h2 class="text-2xl ml-4 my-5">
-        {{$user}} posts
+        {{$user->name}}'s posts
     </h2>
         @foreach($posts as $post)
+            @if(($post->incognito != '1') or (Auth::user()->isAdmin()) or (Auth::user()->id == $user->id))
             <a href="{{route('posts.show',['post'=>$post])}}" class="post-block">
                 <p class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 ">
                     <svg class="w-6 h-6 inline mr-1" viewBox="0 0 20 20">
@@ -14,7 +15,8 @@
                     {{ $post->view_count }} views
                 </p>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white max-w-sm break-words">
-                    {{$post->user->name}}
+                    {{$post->user->name}} @if($post->incognito == '1') <div class="text-gray-400 inline">(anonymous)</div>
+                    @endif
                 </h5>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white max-w-sm break-words">
                     {{$post->title}}
@@ -23,6 +25,7 @@
                     {{$post->description}}
                 </p>
             </a>
+            @endif
         @endforeach
 
 @endsection

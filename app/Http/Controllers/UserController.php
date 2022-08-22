@@ -15,12 +15,13 @@ class UserController extends Controller
     {
         //
     }
-    
-    public function userPosts()
+
+    public function userPosts($user)
     {
-        $posts = Post::all()->where('user_id',Auth::user()->id);
+        $posts = Post::all()->where('user_id',$user);
+        $user = User::find($user);
         // $posts = Post::all();
-        return view('posts.user',['posts'=>$posts]);
+        return view('posts.user',['posts'=>$posts, 'user'=>$user]);
     }
 
     /**
@@ -34,7 +35,7 @@ class UserController extends Controller
         //
     }
 
-    
+
     public function show(User $user)
     {
         return view('users.show', ['user'=>$user]);
@@ -82,7 +83,7 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('users.show',['user'=>$user->id]);
     }
-    
 
-    
+
+
 }

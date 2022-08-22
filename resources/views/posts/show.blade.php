@@ -30,7 +30,7 @@
     @endif
     @if($post->incognito == "1")
     <h3 class="mb-2 text-xl tracking-tight text-gray-900 ml-4">
-        Incognito
+        (anonymous)
     </h3>
     @endif
     <div>
@@ -148,7 +148,7 @@
     </div>
 
     @can('update', $post)
-        @if((Auth::user()->isStaff() and Auth::user()->agency == $post->agency) or Auth::user()->isAdmin())
+        @if((Auth::user()->isStaff() and Auth::user()->agency == $post->agency) or (Auth::user()->isAdmin()) or Auth::user()->id == $post->user_id)
             <div class="mt-4">
                 <a class="app-button my-5 ml-4" href="{{ route('posts.edit', ['post' => $post]) }}">
                     Edit this post
