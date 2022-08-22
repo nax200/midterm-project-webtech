@@ -36,6 +36,36 @@ class UserSeeder extends Seeder
             $user->save();
         }
 
+        $user = User::where('email','roserin@example.com')->first();
+        if (!$user) {
+            $user = new User();
+            $user->name = "Roserin";
+            $user->role =  'STAFF';
+            $user->email = "roserin@example.com";
+            $user->password = Hash::make('roserin');
+            $user->agency = "University";
+//            <option value="Registrar">Registrar</option>
+//            <option value="University">University</option>
+//            <option value="Science Faculty">Science Faculty</option>
+//            <option value="Other agencies">Other agencies</option>
+            $user->save();
+        }
+
+        $user = User::where('email','science@example.com')->first();
+        if (!$user) {
+            $user = new User();
+            $user->name = "Science";
+            $user->role =  'STAFF';
+            $user->email = "science@example.com";
+            $user->password = Hash::make('science');
+            $user->agency = "Science Faculty";
+//            <option value="Registrar">Registrar</option>
+//            <option value="University">University</option>
+//            <option value="Science Faculty">Science Faculty</option>
+//            <option value="Other agencies">Other agencies</option>
+            $user->save();
+        }
+
         $user = User::where('email','user01@example.com')->first();
         if (!$user) {
             $user = new User();
@@ -43,6 +73,16 @@ class UserSeeder extends Seeder
             $user->role = 'USER';
             $user->email = "user01@example.com";
             $user->password = Hash::make('user01');
+            $user->save();
+        }
+
+        $user = User::where('email','user02@example.com')->first();
+        if (!$user) {
+            $user = new User();
+            $user->name = "User02";
+            $user->role = 'USER';
+            $user->email = "user02@example.com";
+            $user->password = Hash::make('user02');
             $user->save();
         }
 

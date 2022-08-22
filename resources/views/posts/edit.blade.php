@@ -82,6 +82,16 @@
             </label>
         </div>
 
+        <div>
+            <label for="agency" class="block my-2 ml-4 text-sm max-w-sm font-medium text-gray-900 dark:text-gray-400">Agency</label>
+            <select id="agency" name="agency" class="ml-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-auto max-w-sm p-2.5 ">
+                <option value="Registrar">Registrar</option>
+                <option value="University">University</option>
+                <option value="Science Faculty">Science Faculty</option>
+                <option value="Other agencies">Other agencies</option>
+            </select>
+        </div>
+
         @if ($errors->has('resolved_date'))
             <p class="text-red-600 ml-4">
                 {{ $errors->first('resolved_date') }}

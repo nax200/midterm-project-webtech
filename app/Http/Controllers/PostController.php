@@ -199,10 +199,10 @@ class PostController extends Controller
         $comment->message = $request->get('message');
         $post->comments()->save($comment);
 
-        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via commenting
-            $post->view_count = $post->view_count - 1;
-            $post->save();
-        }
+//        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via commenting
+//            $post->view_count = $post->view_count - 1;
+//            $post->save();
+//        }
 
         return redirect()->route('posts.show',['post' => $post->id]);
     }
@@ -243,6 +243,7 @@ class PostController extends Controller
         $post->resolved_by = $request->input('resolved_by');
         $date = strtotime($request->input('resolved_date'));
         $post->resolved_date = date('Y-m-d H:i:s', $date);
+        $post->agency = $request->input('agency');
 
         $post->save();
 
@@ -267,10 +268,10 @@ class PostController extends Controller
             $post->like_count = $post->like_count + 1;
             $post->save();
         }
-        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via liking
-            $post->view_count = $post->view_count - 1;
-            $post->save();
-        }
+//        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via liking
+//            $post->view_count = $post->view_count - 1;
+//            $post->save();
+//        }
 //        $user->likedPosts()->save($post);
         return redirect()->route('posts.show',['post' => $post->id]);
     }

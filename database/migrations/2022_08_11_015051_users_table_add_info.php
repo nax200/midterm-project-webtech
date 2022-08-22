@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_image')->after('name')->default('default.jpg');
             $table->string('description')->after('name')->nullable()->default(null);
+            $table->string('agency')->after('name')->nullable()->default(null);
         });
     }
 
