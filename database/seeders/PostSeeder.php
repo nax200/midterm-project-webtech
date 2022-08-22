@@ -35,6 +35,7 @@ class PostSeeder extends Seeder
             $post->updated_at = $date;
             $post->pictures = 'post1.png';
             $post->issue_date = $date;
+            $post->incognito = "0";
 
             $post->save();
         }
@@ -53,6 +54,7 @@ class PostSeeder extends Seeder
             $post->created_at = $date;
             $post->updated_at = $date;
             $post->issue_date = $date;
+            $post->incognito = "0";
 
             $post->save();
         }
@@ -71,6 +73,7 @@ class PostSeeder extends Seeder
             $post->created_at = $date;
             $post->updated_at = $date;
             $post->issue_date = $date;
+            $post->incognito = "0";
 
             $post->save();
         }
@@ -89,6 +92,7 @@ class PostSeeder extends Seeder
             $post->created_at = $date;
             $post->updated_at = $date;
             $post->issue_date = $date;
+            $post->incognito = "0";
 
             $post->save();
         }

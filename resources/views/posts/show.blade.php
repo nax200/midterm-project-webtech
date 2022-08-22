@@ -19,10 +19,16 @@
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ml-4">
         {{$post->title}}
     </h5>
+    @if($post->incognito != "1")
     <h3 class="mb-2 text-xl tracking-tight text-gray-900 ml-4">
         {{ $post->user->name }}
     </h3>
-
+    @endif
+    @if($post->incognito == "1")
+    <h3 class="mb-2 text-xl tracking-tight text-gray-900 ml-4">
+        Incognito
+    </h3>
+    @endif
     <div>
         @can('like', $post)
             <form action="{{route('posts.like',['post'=>$post])}}" method="post">

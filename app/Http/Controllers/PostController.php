@@ -101,9 +101,13 @@ class PostController extends Controller
             $date = date('Y-m-d H:i:s',$date);
             $post->issue_date = $date;
         }
-
         $post->title = $request->input('title');
         $post->description = $request->input('description');
+        if((string)$request->incognito == "1"){
+        $post->incognito = $request->incognito;
+        }else{
+            $post->incognito = "0";
+        }
         $post->user_id = Auth::user()->id;
 //        dd($post);
         $post->save();
@@ -168,6 +172,11 @@ class PostController extends Controller
         $post->issue_date = $date;
         }else{
         $post->issue_date = null;
+        }
+        if((string)$request->incognito == "1"){
+            $post->incognito = $request->incognito;
+        }else{
+            $post->incognito = "0";
         }
         $post->save();
 
@@ -238,7 +247,9 @@ class PostController extends Controller
 
 //        dd($request);
 //        dd($post);
-        $validated = $request->validate(['resolved_date' => ['required','date_format:Y-m-d']]);
+        $validated = $request->validate([
+            'resolved_date' => ['required','date_format:Y-m-d'],
+            'status' => ['required']]);
         $post->status = $request->input('status');
         $post->resolved_by = $request->input('resolved_by');
         $date = strtotime($request->input('resolved_date'));
