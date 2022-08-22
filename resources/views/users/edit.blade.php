@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1 class="px-4 text-3xl border-2 bg-[#fde047] rounded-2xl">
+    <h1 class="px-4 text-3xl">
         Edit Profile
     </h1>
 
