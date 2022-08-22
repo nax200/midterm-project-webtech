@@ -88,10 +88,10 @@ class CommentController extends Controller
         $this->authorize('delete', $comment);
         $comment->delete();
 
-        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via deleting a comment
-            $post->view_count = $post->view_count - 1;
-            $post->save();
-        }
+//        if (is_int($post->view_count) and $post->view_count > 0) { // subtract the view when refreshing page via deleting a comment
+//            $post->view_count = $post->view_count - 1;
+//            $post->save();
+//        }
 
         return redirect()->route('posts.show', ['post' => $post]);
     }

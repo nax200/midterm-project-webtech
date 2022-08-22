@@ -15,6 +15,8 @@
             </svg>
             {{ $post->like_count }} likes
         </p>
+
+
     </div>
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ml-4">
         {{$post->title}}
@@ -112,6 +114,17 @@
 
     <div>
         <p class="ml-4 my-2">
+            Agency:
+            @if($post->agency != null)
+                {{$post->agency}}
+            @else
+                -
+            @endif
+        </p>
+    </div>
+
+    <div>
+        <p class="ml-4 my-2">
             Resolved At:
             @if($post->resolved_date != null)
                 {{$post->resolved_date}}
@@ -122,11 +135,14 @@
     </div>
 
     @can('update', $post)
-    <div class="mt-4">
-        <a class="app-button my-5 ml-4" href="{{ route('posts.edit', ['post' => $post]) }}">
-            Edit this post
-        </a>
-    </div>
+        @if((Auth::user()->isStaff() and Auth::user()->agency == $post->agency) or Auth::user()->isAdmin())
+            <div class="mt-4">
+                <a class="app-button my-5 ml-4" href="{{ route('posts.edit', ['post' => $post]) }}">
+                    Edit this post
+                </a>
+            </div>
+            @endif
+
     @endcan
 
     <section class="mx-16 mt-8">

@@ -69,6 +69,7 @@ class CommentSeeder extends Seeder
         $post->status = 'fix';
         $post->resolved_by = User::where('id','2')->first()->name;
         $post->updated_at = $date;
+        $post->agency = "Science Faculty";
         $post->save();
 
     }
