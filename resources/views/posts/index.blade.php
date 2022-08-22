@@ -72,6 +72,7 @@
     <h2 class="text-2xl my-5 ml-4">
         Most recently created posts
     </h2>
+    <div class="flex justify-center flex-wrap">
     <?php $count = 0 ?>
     <div class="flex justify-center flex-wrap">
     @foreach($posts->sortByDesc('created_at') as $post)
@@ -93,7 +94,7 @@
         <?php $count =$count+1 ?>
         @endif
     @endforeach
-    </div>
+    </div
     <a href="{{route('posts.index.recent')}}" class="ml-4 block" >
         <button type="button" class="app-button-seemore">
                     <div class="inline-flex items-center">
@@ -105,10 +106,11 @@
     <h2 class="text-2xl my-5 ml-4">
         Most recently resolved posts
     </h2>
+    <div class="flex justify-center flex-wrap">
     <?php $count = 0 ?>
     <div class="flex justify-center flex-wrap">
     @foreach($posts->sortByDesc('resolved_date') as $post)
-        @if($count < 5 and $post->resolved_date != null)
+        @if($count < 5 and $post->status == "done")
         <a href="{{route('posts.show',['post'=>$post])}}" class="post-block">
             <p class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-6 inline mr-1" viewBox="0 0 16 16">

@@ -93,6 +93,6 @@ class CommentController extends Controller
 //            $post->save();
 //        }
 
-        return view('posts.show', ['post' => $post]);
+        return redirect()->route('posts.show', ['post' => $post]);
     }
 }
