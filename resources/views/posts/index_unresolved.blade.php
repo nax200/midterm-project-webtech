@@ -3,10 +3,11 @@
 @section('content')
 
     <h2 class="text-2xl my-5 ml-4">
-        Unresolved posts
+        Unresolved posts @if(Auth::user()->agency != null) (Agency: {{Auth::user()->agency}}) @endif
     </h2>
     @foreach($posts->sortByDesc('resolved_date') as $post)
-        @if($post->resolved_date == null or $post->resolved == 0)
+        @if($post->resolved_date == null or $post->resolved_date == 0)
+            @if((Auth::user()->isStaff() and Auth::user()->agency == $post->agency) or Auth::user()->isAdmin())
         <a href="{{route('posts.show',['post'=>$post])}}" class="inline-block min-h-full min-w-max max-w-sm mx-4 my-3 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <p class="bg-orange-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-6 inline mr-1" viewBox="0 0 16 16">
@@ -21,6 +22,7 @@
                 {{$post->description}}
             </p>
         </a>
+                @endif
         @endif
     @endforeach
 
