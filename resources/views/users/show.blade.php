@@ -13,7 +13,7 @@
         <br><a href="{{route('users.posts', ['user'=>$user->id])}}" class="inline-block">
             <button type="button" class="app-button-seemore">
                 <div class="inline-flex items-center">
-                    See my posts
+                    See user's posts
                 </div>
             </button>
         </a>

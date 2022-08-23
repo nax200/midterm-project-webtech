@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-
     <h2 class="text-2xl ml-4 my-5">
         {{$user->name}}'s posts
     </h2>

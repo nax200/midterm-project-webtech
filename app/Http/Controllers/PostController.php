@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -94,13 +95,18 @@ class PostController extends Controller
             $post->pictures = $imageName;
         }
 
+
+
         if ($request->issue_date != null and
             $request->issue_date != 0) {
             $validated = $request->validate(['issue_date' => ['date_format:Y-m-d']]);
             $date = strtotime($request->input('issue_date'));
             $date = date('Y-m-d H:i:s',$date);
-            $post->issue_date = $date;
+        } else {
+            $date = strtotime(Carbon::today());
+            $date = date('Y-m-d H:i:s',$date);
         }
+        $post->issue_date = $date;
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         if((string)$request->incognito == "1"){
@@ -169,10 +175,11 @@ class PostController extends Controller
         $validated = $request->validate(['issue_date' => ['date_format:Y-m-d']]);
         $date = strtotime($request->input('issue_date'));
         $date = date('Y-m-d H:i:s',$date);
-        $post->issue_date = $date;
         }else{
-        $post->issue_date = null;
+            $date = strtotime(Carbon::today());
+            $date = date('Y-m-d H:i:s',$date);
         }
+        $post->issue_date = $date;
         if((string)$request->incognito == "1"){
             $post->incognito = $request->incognito;
         }else{
@@ -248,14 +255,21 @@ class PostController extends Controller
 //        dd($request);
 //        dd($post);
         $validated = $request->validate([
-            'resolved_date' => ['date_format:Y-m-d'],
             'status' => ['required']]);
         $post->status = $request->input('status');
         $post->resolved_by = $request->input('resolved_by');
+
         if ($request->resolved_date != null) {
+            $validated = $request->validate([
+                'resolved_date' => ['date_format:Y-m-d']
+            ]);
             $date = strtotime($request->input('resolved_date'));
-            $post->resolved_date = date('Y-m-d H:i:s', $date);
+            $date = date('Y-m-d H:i:s', $date);
+        } else {
+            $date = strtotime(Carbon::today());
+            $date = date('Y-m-d H:i:s',$date);
         }
+        $post->resolved_date = $date;
 
         $post->agency = $request->input('agency');
 
