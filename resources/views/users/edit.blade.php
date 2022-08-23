@@ -32,8 +32,8 @@
                     {{$errors->first('oldpassword')}}
                 </p>
                 @enderror
-                <x-input id="oldpassword" class="block mt-1 w-full max-w-sm"
-                                type="password"
+                <x-input id="oldpassword" class="block mt-1 w-full max-w-sm" autocomplete="off"
+                                type="password" value=""
                                 name="oldpassword"
                 />
             </div>
@@ -44,7 +44,7 @@
                     {{$errors->first('password')}}
                 </p>
                 @enderror
-                <x-input id="password" class="block mt-1 w-full max-w-sm"
+                <x-input id="password" class="block mt-1 w-full max-w-sm" autocomplete="off"
                                 type="password"
                                 name="password"
                 />
@@ -54,7 +54,7 @@
             <div class="mt-4 ml-4 my-4">
                 <x-label for="password_confirmation" :value="__('Confirm Password')" />
                 <x-input id="password_confirmation" class="block mt-1 w-full max-w-sm"
-                                type="password"
+                                type="password" autocomplete="off"
                                 name="password_confirmation" />
             </div>
             <div class="row">
