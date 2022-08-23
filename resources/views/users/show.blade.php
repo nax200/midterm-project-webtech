@@ -24,18 +24,20 @@
         <br class="mx-8 mt-2">
             Description: {{$user->description}}
         <br>
+        @auth
+            @if (Auth::user()->id == $user->id)
+                <a class="mt-4 flex w-14 rounded-lg bg-gray-800 hover:bg-gray-600 focus:ring-gray-700 text-white border-gray-600" href="{{route('users.edit', ['user'=>$user->id])}}"><div class="ml-3 my-2">edit</div></a>
+            @endif
+        @endauth
         <hr class="border-1 border-gray-900 my-3">
         <h1 class="text-3xl my-6">
             {{ $user->name }}'s Posts
         </h1>
-        @auth
-        @if (Auth::user()->id == $user->id)
-        <a class="mt-4 flex w-14 rounded-lg bg-gray-800 hover:bg-gray-600 focus:ring-gray-700 text-white border-gray-600" href="{{route('users.edit', ['user'=>$user->id])}}"><div class="ml-3 my-2">edit</div></a>
-            @endif
-            @endauth
+
     </section>
     <div>
         @foreach($posts as $post)
+            @if(($post->incognito != '1') or (Auth::user()->isAdmin()) or (Auth::user()->id == $user->id))
             <a href="{{ route('posts.show', ['post' => $post]) }}"
                class="block min-h-full w-100% mx-4 my-3 p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-200 break-words">
@@ -55,6 +57,7 @@
                     {{ $post->like_count }} likes
                 </p>
             </a>
+            @endif
         @endforeach
     </div>
 
