@@ -38,7 +38,8 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', ['user'=>$user]);
+        $posts = Post::all()->where('user_id', $user->id);
+        return view('users.show', ['user'=>$user, 'posts'=>$posts]);
     }
 
     /**
